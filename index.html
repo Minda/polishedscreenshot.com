@@ -49,17 +49,18 @@ p{margin:0}
 .meta .dot::before{content:"·";margin:0 .5rem;color:var(--faint)}
 
 /* agent callout */
-.agent-callout{margin-top:0;margin-bottom:2.5rem;padding:1.6rem 1.6rem 1.4rem;background:var(--wash);border:1px solid var(--rule);border-left:6px solid var(--pop);border-radius:14px;display:grid;gap:1.1rem}
+.agent-callout{margin-top:0;margin-bottom:2rem;padding:1.1rem 1.3rem;background:var(--wash);border:1px solid var(--rule);border-left:6px solid var(--pop);border-radius:14px;display:grid;gap:.7rem}
 .agent-callout .eyebrow{margin:0}
-.agent-callout h2{font-size:1.6rem;line-height:1.15;margin:0}
-.agent-callout h3{font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--fg);margin:0}
-.agent-callout .job{display:grid;gap:.6rem}
-.agent-callout .job p{color:var(--muted);font-size:.95em}
-.agent-callout pre.prompt{margin:0;padding:.9rem 1rem;background:var(--bg);border:1px solid var(--rule);border-radius:8px;font-family:var(--sans);font-size:.85rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-.agent-callout .copyrow{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
-.agent-callout .copy-prompt{font:inherit;font-family:var(--sans);font-size:.85rem;padding:.45rem 1rem;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer}
-.agent-callout .copy-status{font-family:var(--sans);font-size:.8rem;color:var(--muted);min-height:1.3em}
-.agent-callout .agent-note{font-family:var(--sans);font-size:.82rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.9rem}
+.agent-callout h2{font-size:1.35rem;line-height:1.15;margin:0}
+.agent-callout p{font-size:.95em}
+.agent-callout .job{display:grid;gap:.4rem}
+.agent-callout .jobhead{display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap}
+.agent-callout h3{font-family:var(--sans);font-size:.9rem;font-weight:600;color:var(--fg);margin:0}
+.agent-callout pre.prompt{margin:0;padding:.7rem .85rem;background:var(--bg);border:1px solid var(--rule);border-radius:8px;font-family:var(--sans);font-size:.82rem;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.agent-callout .copyrow{display:flex;align-items:center;gap:.7rem}
+.agent-callout .copy-prompt{font:inherit;font-family:var(--sans);font-size:.8rem;padding:.3rem .85rem;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer}
+.agent-callout .copy-status{font-family:var(--sans);font-size:.78rem;color:var(--muted)}
+.agent-callout .agent-note{font-family:var(--sans);font-size:.78rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.6rem}
 
 /* prose */
 .prose{display:grid;gap:1.1rem}
@@ -159,23 +160,19 @@ body.text article.g.dim{opacity:1}
   <aside class="col agent-callout" aria-labelledby="agent-callout-title">
     <p class="eyebrow">For your agent</p>
     <h2 id="agent-callout-title">Point your agent at this page</h2>
-    <p>Give an AI agent this page's address and it can use the thirteen guidelines for you in two ways. Copy a prompt below (it includes this page's address), paste it into your agent, then add the documentation you want it to work on.</p>
+    <p>Paste the first prompt into your agent along with your documentation. Add the second after it to have the agent make the changes itself.</p>
 
     <div class="job">
-      <h3>Get feedback on documentation you have</h3>
-      <p>The agent reviews your documentation and tells you which screenshots to keep, replace with text, or cut, with the guideline behind each call.</p>
-      <pre class="prompt" id="prompt-review">Read <span class="page-url">this page</span>. It is a set of thirteen guidelines for deciding which screenshots to keep in software documentation. Then review the documentation I give you against those guidelines. For each screenshot, say whether to keep it, replace it with text, or cut it, and name the guideline behind each call. Also flag any screenshot that has no date a reader can find, and any alt text that only repeats the step.</pre>
-      <div class="copyrow"><button type="button" class="copy-prompt" data-target="prompt-review">Copy prompt</button><span class="copy-status" role="status"></span></div>
+      <div class="jobhead"><h3>1. Review my documentation</h3><span class="copyrow"><span class="copy-status" role="status"></span><button type="button" class="copy-prompt" data-target="prompt-review">Copy prompt</button></span></div>
+      <pre class="prompt" id="prompt-review">Read <span class="page-url">this page</span>. It sets out thirteen guidelines for deciding which screenshots to keep in documentation. Review the documentation I give you against them. For each screenshot, say whether to keep it, replace it with text, or cut it, and name the guideline.</pre>
     </div>
 
     <div class="job">
-      <h3>Build or update documentation</h3>
-      <p>The agent writes or revises your documentation on its own, using the guidelines as its rules, so the screenshots that remain are ones that earn their place.</p>
-      <pre class="prompt" id="prompt-build">Read <span class="page-url">this page</span>. It is a set of thirteen guidelines for deciding which screenshots to keep in software documentation. Use them as the rules for the documentation you write or update for me, and work through it on your own. For each step, run the six-question check near the end of the page, and keep a screenshot only when one of its exceptions applies. Give every screenshot that stays a date and alt text for what the step does not already say, and end each procedure with something I can check. When you finish, list each screenshot you kept and the guideline exception behind it.</pre>
-      <div class="copyrow"><button type="button" class="copy-prompt" data-target="prompt-build">Copy prompt</button><span class="copy-status" role="status"></span></div>
+      <div class="jobhead"><h3>2. Then make the changes</h3><span class="copyrow"><span class="copy-status" role="status"></span><button type="button" class="copy-prompt" data-target="prompt-build">Copy prompt</button></span></div>
+      <pre class="prompt" id="prompt-build">Then make the changes yourself, writing or updating the documentation as needed. Run the page's six-question check for each step, date every screenshot you keep, and list each one with the exception behind it.</pre>
     </div>
 
-    <p class="agent-note">Note for agents: the full text of every guideline, tradeoff and exception is in this page's HTML. If you are reading the rendered page instead, switch on Text version (top right) first so the collapsed sections are open.</p>
+    <p class="agent-note">Note for agents: every guideline, tradeoff and exception is in this page's HTML. If you are reading the rendered page, turn on Text version (top right) first.</p>
   </aside>
 
   <div class="col prose">
@@ -549,7 +546,7 @@ body.text article.g.dim{opacity:1}
       function fail(){
         var range=document.createRange(); range.selectNodeContents(pre);
         var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-        status.textContent='Could not copy automatically. Copy the selected prompt and add this page\'s address.';
+        status.textContent=pre.querySelector('.page-url')?'Could not copy automatically. Copy the selected prompt and add this page\'s address.':'Could not copy automatically. Copy the selected prompt.';
       }
       if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(clone.textContent).then(ok,fail); } else { fail(); }
     });
