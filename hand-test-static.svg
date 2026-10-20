@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" font-family="Helvetica, Arial, sans-serif">
+  <title>The hand test: cover the screenshot, read the alt text by itself</title>
+  <rect width="800" height="450" fill="#f4f1ea"/>
+  <rect x="30" y="30" width="740" height="390" rx="10" fill="#ffffff" stroke="#d9d4c7"/>
+  <text x="60" y="78" font-size="22" font-weight="700" fill="#2b2b2b">Step 3. Turn on the connector</text>
+  <text x="60" y="106" font-size="15" fill="#444">Open Settings and switch the toggle next to Google Drive.</text>
+  <g id="shot">
+    <rect x="60" y="126" width="440" height="200" rx="6" fill="#eef1f5" stroke="#c8cfd8"/>
+    <rect x="60" y="126" width="440" height="26" rx="6" fill="#dfe4ea"/>
+    <circle cx="76" cy="139" r="5" fill="#f26b5b"/><circle cx="92" cy="139" r="5" fill="#f5c343"/><circle cx="108" cy="139" r="5" fill="#59c26d"/>
+    <text x="84" y="190" font-size="14" fill="#333">Connectors</text>
+    <rect x="84" y="206" width="392" height="44" rx="6" fill="#fff" stroke="#d2d8e0"/>
+    <text x="100" y="233" font-size="14" fill="#333">Google Drive</text>
+    <rect x="412" y="216" width="48" height="24" rx="12" fill="#2f7d4f"/>
+    <circle cx="448" cy="228" r="9" fill="#fff"/>
+    <text x="84" y="290" font-size="12" fill="#889">Changes save automatically.</text>
+  </g>
+  <text x="60" y="352" font-size="14" font-style="italic" fill="#8a1c1c">Alt text: The Google Drive toggle in Connectors, switched on (green, knob to the right).</text>
+  <text x="60" y="384" font-size="15" fill="#444">Step 4. Close Settings. The Drive icon now appears in the chat bar.</text>
+  <g opacity="1">
+    <rect x="545" y="126" width="205" height="200" rx="8" fill="#2b2b2b"/>
+    <text x="562" y="170" font-size="17" font-weight="700" fill="#fff">Hand stays here.</text>
+    <text x="562" y="200" font-size="14" fill="#eee">Now read only the</text>
+    <text x="562" y="220" font-size="14" fill="#eee">red line underneath.</text>
+    <text x="562" y="258" font-size="14" fill="#eee">Could you finish Step 3</text>
+    <text x="562" y="278" font-size="14" fill="#eee">without lifting it?</text>
+    <text x="562" y="308" font-size="12" fill="#bbb">If not, the alt text isn't done.</text>
+  </g>
+  <g id="hand" transform="translate(60 0)" fill="#4a5568" stroke="#ffffff" stroke-width="5" stroke-linejoin="round">
+    <rect x="190" y="118" width="270" height="216" rx="44"/>
+    <rect x="-40" y="118" width="280" height="50" rx="25"/>
+    <rect x="-50" y="172" width="290" height="50" rx="25"/>
+    <rect x="-44" y="226" width="284" height="50" rx="25"/>
+    <rect x="-20" y="280" width="260" height="50" rx="25"/>
+  </g>
+</svg>

@@ -18,7 +18,7 @@ Run the commands below from the repository root.
 3. Commit and push. Do this only when the owner has asked you to deploy.
 
    ```bash
-   git add index.html
+   git add index.html   # plus any other file you changed, such as an SVG
    git commit -m "Short description of the change"
    git push origin main
    ```
