@@ -1,12 +1,595 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Polished Screenshot</title>
-</head>
-<body>
-  <h1>Polished Screenshot</h1>
-  <p>This site is coming soon.</p>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Polished Screenshot</title>
+<meta name="description" content="Thirteen guidelines for documenting software that changes faster than you can write about it.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one 68ch essay column; a quiet sans "instrument panel" (top bar, chips, stepper) sits around serif prose. The 13 guidelines are the spine; everything else serves them. */
+/* Palette: deep teal signature for headings and nav, persimmon pop for featured numbers and small highlights, warm paper canvas, pale mist surfaces, burnt persimmon for accent text. */
+:root{
+  --bg:#FAF7F2; --fg:#22332F; --muted:#5C6B66; --faint:#9AA8A3;
+  --rule:#D9E3DF; --wash:#E5EFEB; --accent:#07564F; --accent-ink:#043F3A;
+  --pop:#F06445; --lost:#AD3E28; --keep:#07564F;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17211F; --fg:#E9EFEC; --muted:#A7B5B0; --faint:#6E7D78;
+  --rule:#2E3C38; --wash:#1F2D2A; --accent:#6FBDB2; --accent-ink:#9AD6CD;
+  --pop:#F06445; --lost:#F27A5E; --keep:#6FBDB2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17211F; --fg:#E9EFEC; --muted:#A7B5B0; --faint:#6E7D78;
+  --rule:#2E3C38; --wash:#1F2D2A; --accent:#6FBDB2; --accent-ink:#9AD6CD;
+  --pop:#F06445; --lost:#F27A5E; --keep:#6FBDB2; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--serif);font-size:19px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 6rem;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent);text-underline-offset:.15em}
+a:hover{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+h1,h2,h3{text-wrap:balance;font-weight:500;margin:0;color:var(--accent)}
+p{margin:0}
+.wrap{max-width:1080px;margin:0 auto}
+.col{max-width:68ch;margin:0 auto}
+
+/* top bar */
+.bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:1rem 0;border-bottom:1px solid var(--rule);font-family:var(--sans);font-size:.82rem;color:var(--muted)}
+.bar .brand{color:var(--accent);font-weight:600;letter-spacing:.01em;text-decoration:none}
+.bar-left{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.bar button{font:inherit;color:var(--fg);background:none;border:1px solid var(--rule);border-radius:999px;padding:.3rem .8rem;cursor:pointer}
+.bar button[aria-pressed="true"]{background:var(--accent);color:#FAF7F2;border-color:var(--accent)}
+
+/* hero */
+.hero{padding:5rem 0 3rem}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;letter-spacing:-.01em;font-weight:500}
+.deck{font-style:italic;font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.35;color:var(--muted);margin-top:1.4rem;max-width:34em}
+.meta{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin-top:1.8rem;display:flex;flex-wrap:wrap;gap:.35rem 0}
+.meta b{color:var(--fg);font-weight:600}
+.meta .dot::before{content:"·";margin:0 .5rem;color:var(--faint)}
+
+/* agent callout */
+.agent-callout{margin-top:0;margin-bottom:2.5rem;padding:1.6rem 1.6rem 1.4rem;background:var(--wash);border:1px solid var(--rule);border-left:6px solid var(--pop);border-radius:14px;display:grid;gap:1.1rem}
+.agent-callout .eyebrow{margin:0}
+.agent-callout h2{font-size:1.6rem;line-height:1.15;margin:0}
+.agent-callout h3{font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--fg);margin:0}
+.agent-callout .job{display:grid;gap:.6rem}
+.agent-callout .job p{color:var(--muted);font-size:.95em}
+.agent-callout pre.prompt{margin:0;padding:.9rem 1rem;background:var(--bg);border:1px solid var(--rule);border-radius:8px;font-family:var(--sans);font-size:.85rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.agent-callout .copyrow{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.agent-callout .copy-prompt{font:inherit;font-family:var(--sans);font-size:.85rem;padding:.45rem 1rem;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer}
+.agent-callout .copy-status{font-family:var(--sans);font-size:.8rem;color:var(--muted);min-height:1.3em}
+.agent-callout .agent-note{font-family:var(--sans);font-size:.82rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:.9rem}
+
+/* prose */
+.prose{display:grid;gap:1.1rem}
+.prose .rule-line{border-left:3px solid var(--pop);padding:.2rem 0 .2rem 1rem}
+section{padding:3.5rem 0 0}
+.eyebrow{font-family:var(--sans);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lost);margin-bottom:1rem}
+h2{font-size:1.9rem;line-height:1.15;margin-bottom:1.2rem}
+
+/* lens chips */
+.lens{margin-top:1.4rem}
+.lens p{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin-bottom:.7rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{font:inherit;font-family:var(--sans);font-size:.85rem;background:var(--wash);border:1px solid var(--rule);color:var(--fg);border-radius:999px;padding:.4rem .9rem;cursor:pointer;display:flex;align-items:center;gap:.5rem}
+.chip small{color:var(--muted);font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--accent);color:#FAF7F2;border-color:var(--accent)}
+.chip[aria-pressed="true"] small{color:#FAF7F2;opacity:.8}
+.lens-note{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin-top:.8rem;min-height:1.4em}
+.lens-note em{color:var(--fg);font-style:normal}
+
+/* guideline cards */
+.gl{margin-top:2rem}
+article.g{padding:2.4rem 0;border-top:1px solid var(--rule);scroll-margin-top:1rem;transition:opacity .2s}
+article.g.dim{opacity:.28}
+article.g .num{font-family:var(--sans);font-size:.8rem;color:var(--lost);font-weight:600;font-variant-numeric:tabular-nums;margin-bottom:.4rem}
+article.g h3{font-size:1.5rem;line-height:1.2;margin-bottom:.9rem}
+article.g .rule{display:grid;gap:.9rem}
+.path{font-family:var(--sans);font-size:.95em;background:var(--wash);padding:.15em .5em;border-radius:4px;white-space:nowrap}
+.places{margin:0;padding-left:1.1rem;display:grid;gap:.6rem}
+.places li::marker{color:var(--faint)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.1rem}
+.tag{font-family:var(--sans);font-size:.74rem;color:var(--muted);border:1px solid var(--rule);border-radius:999px;padding:.15rem .6rem}
+details.trade{margin-top:1.3rem;border:1px solid var(--rule);border-radius:10px;background:var(--wash)}
+details.trade summary{list-style:none;cursor:pointer;font-family:var(--sans);font-size:.88rem;font-weight:500;padding:.85rem 1.1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+details.trade summary::-webkit-details-marker{display:none}
+details.trade summary .arrow{color:var(--muted);transition:transform .2s}
+details.trade[open] summary .arrow{transform:rotate(180deg)}
+details.trade .inner{padding:0 1.1rem 1.2rem;display:grid;gap:1.1rem;font-size:.95em}
+.lost h4,.when h4{font-family:var(--sans);font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;margin:0 0 .4rem;font-weight:600}
+.lost h4{color:var(--lost)}.when h4{color:var(--keep)}
+.when ul{margin:0;padding-left:1.1rem;display:grid;gap:.5rem}
+.when li::marker{color:var(--keep)}
+
+/* walkthrough */
+.walk{border:1px solid var(--rule);background:var(--wash);border-radius:14px;padding:1.6rem;margin-top:1.4rem}
+.walk .q{font-size:1.25rem;line-height:1.3;min-height:3.2em}
+.walk .from{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-top:.6rem}
+.walk .btns{display:flex;gap:.6rem;margin-top:1.3rem;flex-wrap:wrap;align-items:center}
+.walk button{font:inherit;font-family:var(--sans);font-size:.95rem;padding:.6rem 1.3rem;border-radius:999px;border:1px solid var(--lost);background:var(--lost);color:#FAF7F2;cursor:pointer}
+.walk button.ghost{background:none;color:var(--accent);border-color:var(--accent)}
+.walk button.link{border:none;background:none;color:var(--muted);padding:.6rem .4rem;text-decoration:underline}
+.walk .result{display:none}
+.walk.done .live{display:none}.walk.done .result{display:block}
+.walk .verdict{font-family:var(--sans);font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;font-weight:600}
+.walk .verdict.take{color:var(--lost)}.walk .verdict.skip{color:var(--keep)}
+.walk .result p+p{margin-top:.6rem}
+.walk .trail{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-top:1rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.walk .trail span{border:1px solid var(--faint);border-radius:999px;padding:.1rem .55rem}
+.walk-text{display:none;margin-top:1.4rem}
+.walk-text ol{padding-left:1.3rem;display:grid;gap:.7rem;margin:1rem 0}
+.walk-text ol li span{color:var(--muted);font-size:.9em}
+
+/* coda / footer */
+.coda p+ol{margin-top:1rem}
+.coda ol{padding-left:1.3rem;display:grid;gap:.6rem;margin:0}
+footer{margin-top:5rem;padding-top:1.2rem;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;color:var(--muted);display:grid;gap:.3rem}
+
+/* text-only mode */
+body.text .chips,body.text .lens-note,body.text .lens p,body.text .tags,body.text .lens-intro{display:none}
+body.text details.trade{border:none;background:none;border-radius:0}
+body.text details.trade summary{display:none}
+body.text details.trade .inner{padding:0}
+body.text .walk{display:none}
+body.text .walk-text{display:block}
+body.text article.g.dim{opacity:1}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:520px){body{font-size:17px}.hero{padding:3rem 0 2rem}article.g h3{font-size:1.3rem}.walk{padding:1.2rem}}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="bar">
+    <div class="bar-left"><a class="brand" href="#top">Polished Screenshot</a></div>
+    <button id="textToggle" type="button" aria-pressed="false">Text version</button>
+  </div>
+
+  <header class="hero col" id="top">
+    <h1>Every screenshot is a decision</h1>
+    <p class="deck">Thirteen guidelines for documenting software that changes faster than you can write about it. Each one says what it costs you, and names the two moments when you should ignore it and take the picture.</p>
+    <div class="meta">
+      <span><b>Minda Myers</b></span>
+      <span class="dot"><a href="https://mindamyers.com">mindamyers.com</a></span>
+      <span class="dot"><a href="https://github.com/Minda/">github.com/Minda</a></span>
+      <span class="dot">About a 10-minute read</span>
+    </div>
+  </header>
+
+  <aside class="col agent-callout" aria-labelledby="agent-callout-title">
+    <p class="eyebrow">For your agent</p>
+    <h2 id="agent-callout-title">Point your agent at this page</h2>
+    <p>Give an AI agent this page's address and it can use the thirteen guidelines for you in two ways. Copy a prompt below (it includes this page's address), paste it into your agent, then add the documentation you want it to work on.</p>
+
+    <div class="job">
+      <h3>Get feedback on documentation you have</h3>
+      <p>The agent reviews your documentation and tells you which screenshots to keep, replace with text, or cut, with the guideline behind each call.</p>
+      <pre class="prompt" id="prompt-review">Read <span class="page-url">this page</span>. It is a set of thirteen guidelines for deciding which screenshots to keep in software documentation. Then review the documentation I give you against those guidelines. For each screenshot, say whether to keep it, replace it with text, or cut it, and name the guideline behind each call. Also flag any screenshot that has no date a reader can find, and any alt text that only repeats the step.</pre>
+      <div class="copyrow"><button type="button" class="copy-prompt" data-target="prompt-review">Copy prompt</button><span class="copy-status" role="status"></span></div>
+    </div>
+
+    <div class="job">
+      <h3>Build or update documentation</h3>
+      <p>The agent writes or revises your documentation on its own, using the guidelines as its rules, so the screenshots that remain are ones that earn their place.</p>
+      <pre class="prompt" id="prompt-build">Read <span class="page-url">this page</span>. It is a set of thirteen guidelines for deciding which screenshots to keep in software documentation. Use them as the rules for the documentation you write or update for me, and work through it on your own. For each step, run the six-question check near the end of the page, and keep a screenshot only when one of its exceptions applies. Give every screenshot that stays a date and alt text for what the step does not already say, and end each procedure with something I can check. When you finish, list each screenshot you kept and the guideline exception behind it.</pre>
+      <div class="copyrow"><button type="button" class="copy-prompt" data-target="prompt-build">Copy prompt</button><span class="copy-status" role="status"></span></div>
+    </div>
+
+    <p class="agent-note">Note for agents: the full text of every guideline, tradeoff and exception is in this page's HTML. If you are reading the rendered page instead, switch on Text version (top right) first so the collapsed sections are open.</p>
+  </aside>
+
+  <div class="col prose">
+    <p>The software you're documenting redesigns itself every few weeks now. AI products are the worst offenders, but it's spreading. A button moves. A panel gets a new name. The settings page splits in two. Every screenshot you publish is a small debt. It comes due at the next redesign, and nothing tells you when. You find out when a reader emails to say the button isn't there.</p>
+    <p>So: thirteen guidelines. Each one says what you give up by following it, plus two situations where following it would make the document worse. Hit one of those, take the screenshot. The point isn't zero screenshots. The point is that every screenshot in your document is one you decided to take.</p>
+    <p class="rule-line">Every essential action, interface label, prerequisite, warning, and expected result has to be available outside the screenshot.</p>
+  </div>
+
+  <section class="col" id="guidelines">
+    <p class="eyebrow">The thirteen</p>
+    <h2>Each guideline, what it costs, and when to break it</h2>
+    <p class="lens-intro">Open <em>What it costs</em> under any guideline for the tradeoff and the two exceptions. The chips group the guidelines by the kind of thing they give up.</p>
+
+    <div class="lens">
+      <p>Show the guidelines that trade away…</p>
+      <div class="chips" role="group" aria-label="Filter guidelines by what is lost">
+        <button class="chip" type="button" data-lens="where" aria-pressed="false">Where it is <small>5</small></button>
+        <button class="chip" type="button" data-lens="sure" aria-pressed="false">Certainty <small>3</small></button>
+        <button class="chip" type="button" data-lens="route" aria-pressed="false">Shape or route <small>2</small></button>
+        <button class="chip" type="button" data-lens="control" aria-pressed="false">Control of the picture <small>2</small></button>
+        <button class="chip" type="button" data-lens="none" aria-pressed="false">Nothing <small>1</small></button>
+      </div>
+      <p class="lens-note" id="lensNote"></p>
+    </div>
+
+    <div class="gl">
+
+      <article class="g" id="g1" data-lens="where">
+        <p class="num">Guideline 1</p>
+        <h3>Crop to the minimum</h3>
+        <div class="rule">
+          <p>Screenshot only the part of the screen that shows the thing. The test: if the crop is so tight the reader can't tell where they are, go one step wider. Stop when they can find the part of the app they need to work in.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: orientation</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Orientation. A cropped toggle looks like every other toggle. The reader gets the control but not where it lives, and they lose the "am I even in the right place" reassurance a wider shot gives them.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>First screenshot in the document. The reader needs to establish they're in the right application before anything else works.</li>
+              <li>The control is generic. An unlabeled toggle, a plain text field. Only the stuff around it tells the reader which one you mean.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g2" data-lens="where">
+        <p class="num">Guideline 2</p>
+        <h3>Write the path as text</h3>
+        <div class="rule">
+          <p>Write the route the way you'd say it. <span class="path">Settings → Members → Invite</span></p>
+          <p>A rename still costs you an edit. But it's a text edit, and text is searchable.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: pointing</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>The thing screenshots are best at. Pointing. The reader still has to locate each item at each level. Paths also assume every step has a visible label, which falls apart on icon-only sidebars and overflow menus.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>A step in the path has no label. You can't write what has no name. Use an inline glyph (guideline 4) or a tight crop.</li>
+              <li>The path runs deeper than about four levels. Readers lose the thread. A deep link or the product's own search gets them there better.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g3" data-lens="where">
+        <p class="num">Guideline 3</p>
+        <h3>Name the control the way the interface does</h3>
+        <div class="rule">
+          <p>"The <em>Invite members</em> button." Exactly that string. One sentence serves three audiences: sighted readers, screen reader users hearing the same words announced, and anyone hitting Ctrl+F.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: position</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Position. Names repeat. "Edit" might show up six times on one page and the callout gives the reader no way to pick the right one.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The name appears more than once on the screen.</li>
+              <li>The visible label and the accessible name don't match. Happens constantly with icon buttons whose tooltip says one thing and whose aria-label says another. The reader ends up hunting for text that isn't on screen anywhere.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g4" data-lens="where">
+        <p class="num">Guideline 4</p>
+        <h3>Put the icon in the sentence</h3>
+        <div class="rule">
+          <p>"Click the ⚙ icon." Small, scales with the text, no screenshot.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: location</span><span class="tag">fidelity risk</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Location again. You've identified the icon, not where it sits. There's a fidelity risk too: your glyph isn't the vendor's glyph, and a near-match confuses people more than no picture would.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The vendor's icon is custom and nothing standard comes close. Use a tiny crop.</li>
+              <li>Several similar icons sit next to each other. A toolbar of gears. Then position is the information, not shape.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g5" data-lens="sure">
+        <p class="num">Guideline 5</p>
+        <h3>Hand it to the product's own search</h3>
+        <div class="rule">
+          <p>"Press ⌘K, type <em>invite</em>."</p>
+          <p>This survives any redesign, because the vendor maintains the mapping between the word and the place. You stop owning that problem. Best durability on this list.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: precision</span><span class="tag">best durability</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Precision. Search results vary by tenant and plan. The query might return five hits with nothing telling the reader which one.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>Your word isn't their word. If your team calls it one thing and the vendor calls it another, the search comes back empty and the reader concludes the feature doesn't exist.</li>
+              <li>Admin settings. They frequently aren't in product search at all. Check before you rely on it.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g6" data-lens="route">
+        <p class="num">Guideline 6</p>
+        <h3>Deep link to the exact page</h3>
+        <div class="rule">
+          <p>Link straight to the settings page instead of describing the walk. Put the text path underneath it as a fallback, every time.</p>
+          <p>URLs change. When they do it's a text edit, which is the trade you signed up for.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: navigational knowledge</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Navigational knowledge. The reader gets there once and learns nothing about getting back without you.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The page is permission-gated. The failure isn't clean. It's a silent redirect to some dashboard, or a 403 the reader reads as their own mistake.</li>
+              <li>The reader will come back often. Teaching the route beats the shortcut.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g7" data-lens="where">
+        <p class="num">Guideline 7</p>
+        <h3>Anything they type goes in a code block</h3>
+        <div class="rule">
+          <p>Prompts, values, URLs: code block. Never screenshot a string somebody has to type.</p>
+          <p>Show the paste target only when the input field is unlabeled or sits among several that look the same. Not "when it feels helpful." Three authors will resolve that three ways and the document ends up with no rule at all.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: destination</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>The destination. The reader has the string, not the box it goes in.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The input field is unlabeled, or there are three that look the same.</li>
+              <li>Pasting does something unexpected. Reformats the text, splits it across fields, fires off a search.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g8" data-lens="sure">
+        <p class="num">Guideline 8</p>
+        <h3>End with something the reader can check</h3>
+        <div class="rule">
+          <p>Replace the end-state screenshot with something countable. "Confirm 3 members are listed."</p>
+        </div>
+        <div class="tags"><span class="tag">loses: "does this look right?"</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>The answer to "does this look right?" A checklist only works for states the reader can already find and name. Somebody who can't locate the member list can't count three members in it.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>Success is visual, not countable. A chart rendered. A layout shifted. A badge appeared.</li>
+              <li>The action is destructive or hard to undo. Then the reader needs to verify before committing, not after.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g9" data-lens="control">
+        <p class="num">Guideline 9</p>
+        <h3>Use the vendor's screenshot, and name the section</h3>
+        <div class="rule">
+          <p>Link to the vendor's article rather than reproducing their interface. Name the section you're pointing at, because a named section survives a broken anchor. The reader can search the page for the words.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: control</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Control. Their crop, their plan tier, their configuration, their link rot. It also pulls the reader out of your document into content written for somebody else.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>Their screenshot shows a tier or configuration you don't have. SSO differences, disabled features, admin-only controls. Check this every single time. It's the common case, not the edge case.</li>
+              <li>Their page sits behind a login, is region-gated, or shows a control your readers can't access.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g10" data-lens="sure">
+        <p class="num">Guideline 10</p>
+        <h3>One decision table instead of four screenshots</h3>
+        <div class="rule">
+          <p>Four states, four screenshots? Make it a table. If you see A, do X. If you see B, do Y.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: recognition</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Recognition. "If you see A" assumes the reader can already spot A. When the states look alike and resist description, the table can't do the work.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The states are hard to put in words. Subtle visual differences. Error states that look nearly identical.</li>
+              <li>There are only two states. Then a table is more overhead than a sentence.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g11" data-lens="route">
+        <p class="num">Guideline 11</p>
+        <h3>A field table, with one sentence saying where the form is</h3>
+        <div class="rule">
+          <p>Swap the annotated form screenshot for a table. Field, What to enter, Why.</p>
+          <p>Open every field table with one sentence saying where the form lives. Not optional. Without it you've handed the reader answers to a question they can't find.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: the shape of the form</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>The shape of the form. Tables flatten sections, grouping, and order. They also hide which fields are required unless you add a column for it.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The form has conditional logic. Field B only appears when field A is set a certain way. Tables handle that badly.</li>
+              <li>The form is long enough that people lose their place. A screenshot works as a map.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g12" data-lens="control">
+        <p class="num">Guideline 12</p>
+        <h3>Give every screenshot a date the reader can find</h3>
+        <div class="rule">
+          <p>Every screenshot needs a date: when it was taken, or when it was last checked against the live interface. The date doesn't have to sit on the image. Four places work. Pick one per document and stick with it.</p>
+          <ul class="places">
+            <li><strong>In the caption.</strong> <span class="path">Captured 14 Aug 2026</span> Visible to everyone, costs you a line under every image.</li>
+            <li><strong>In the alt text or the description,</strong> after whatever the step didn't already say. Alt text for a simple image; the longer description guideline 13 calls for when the image is complex. Screen reader users hear it, Ctrl+F finds it, and the page stays clean.</li>
+            <li><strong>Once at the top, plus a tag on anything revised since.</strong> <span class="path">Interface verified 14 Aug 2026</span> at the top of the document, then <span class="path">Revised 3 Oct 2026</span> only on the screenshots that changed after that.</li>
+          </ul>
+          <p>Without a date, staleness is invisible. The reader can't tell if they're looking at last week's interface or last spring's, so whatever trust they put in it is unearned.</p>
+        </div>
+        <div class="tags"><span class="tag">loses: cleanliness, or visibility</span></div>
+        <details class="trade"><summary>What it costs, and when to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="lost"><h4>What's lost</h4><p>Depends where you put it. A caption costs visual cleanliness, and one thing less obvious: a visible date invites people to dismiss a screenshot as old even when it's still correct. Alt text or a description avoids both, and hides the date from sighted readers, which is its own problem. The top-of-document line is the cleanest, and it only works if you actually tag the revisions.</p></div>
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The screenshot shows something version-stable. A generic OS file dialog. Dating it implies more churn than actually exists.</li>
+              <li>The publishing system already stamps the document with a visible last-updated date, and every screenshot was checked at that update. Then a per-screenshot date repeats what the reader can already see. The moment one screenshot is older than that stamp, it needs its own tag.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="g" id="g13" data-lens="none">
+        <p class="num">Guideline 13</p>
+        <h3>Alt text carries only what the step doesn't already say</h3>
+        <div class="rule">
+          <p>Write alt text for the part of the image the step text hasn't covered. Nothing else.</p>
+          <p>Here's the useful part. If you sit down to write that alt text and there's nothing left to say, you've just learned that you don't need the screenshot.</p>
+        </div>
+        <div class="tags"><span class="tag">loses nothing; that's the point</span></div>
+        <details class="trade"><summary>When to break it <span class="arrow">▾</span></summary>
+          <div class="inner">
+            <div class="when"><h4>When not to follow it</h4><ul>
+              <li>The image is complex. A full dashboard, a chart. The delta is too big for one alt string, so write a longer description near the image instead. Alt text is the wrong container.</li>
+              <li>The delta is an error message or a status string. Put it in the prose. Then the screenshot might disappear as well, which is the outcome you're after.</li>
+            </ul></div>
+          </div>
+        </details>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="col coda" id="alt">
+    <p class="eyebrow">For any screenshot that stays</p>
+    <h2>Two tests. Use your hand.</h2>
+    <p>Cover the image with your hand or a couple of fingers. Actually do it. Then:</p>
+    <ol>
+      <li><strong>Read the alt text by itself.</strong> With the image blocked out, does it tell you what the image was trying to convey? Not an inventory of what's in it. What it's there to show. If you'd have to lift your hand to finish the step, the alt text isn't done.</li>
+      <li><strong>Now read the text around it.</strong> Hand still down. Does the alt text support and add to what's already on the page, or does it just repeat it? If it repeats, trim it to the part the step doesn't say (guideline 13). If nothing is left after trimming, the screenshot goes too.</li>
+    </ol>
+  </section>
+
+  <section class="col" id="decide">
+    <p class="eyebrow">Try it on a step you're writing</p>
+    <h2>Do you need a screenshot here?</h2>
+    <p>Six questions, each built from one guideline's exceptions. Answer for the one step in front of you. Most steps end at "skip it."</p>
+
+    <div class="walk" id="walk">
+      <div class="live">
+        <p class="q" id="wq"></p>
+        <p class="from" id="wfrom"></p>
+        <div class="btns">
+          <button type="button" id="wyes">Yes</button>
+          <button type="button" id="wno" class="ghost">No</button>
+          <button type="button" id="wback" class="link">Back</button>
+        </div>
+      </div>
+      <div class="result">
+        <p class="verdict" id="wverdict"></p>
+        <p id="wtext"></p>
+        <p class="from" id="wref"></p>
+        <div class="trail" id="wtrail"></div>
+        <div class="btns"><button type="button" id="wreset" class="ghost">Start over</button></div>
+      </div>
+    </div>
+
+    <div class="walk-text">
+      <p>Answer each in order. The first "yes" decides.</p>
+      <ol>
+        <li>Is this the first screenshot in the document? <span>Yes: take it, cropped wide enough to show the application. Guideline 1.</span></li>
+        <li>Does the control's name appear more than once on the screen, or not match its visible label, or have no label at all? <span>Yes: take a tight crop, or use an inline glyph if the icon is standard. Guidelines 3 and 4.</span></li>
+        <li>Will the reader paste or type into a field that is unlabeled or sits among lookalikes, or does pasting do something unexpected? <span>Yes: show the paste target. Guideline 7.</span></li>
+        <li>Is success visual rather than countable, or is the action destructive or hard to undo? <span>Yes: take the end-state screenshot. Guideline 8.</span></li>
+        <li>Are you describing states that are hard to tell apart in words? <span>Yes: screenshot the states instead of a decision table. Guideline 10.</span></li>
+        <li>Is the form conditional, or long enough that people lose their place? <span>Yes: one screenshot as a map, plus the field table. Guideline 11.</span></li>
+      </ol>
+      <p>All six "no": skip the screenshot. Write the path (2), name the control (3), hand off to search (5) or deep link (6), and finish with something the reader can check (8). If a screenshot does stay, give it a findable date (12) and write alt text for the delta only (13).</p>
+    </div>
+  </section>
+
+  <footer class="col">
+    <span>Polished Screenshot is written by Minda Myers · <a href="https://mindamyers.com">mindamyers.com</a> · <a href="https://github.com/Minda/">github.com/Minda</a></span>
+    <span>Plain HTML, no build step, no tracking. Last revised 19 Oct 2026.</span>
+    <span>Credit to Brandon Harris (<a href="https://www.linkedin.com/in/brandonharris1/">LinkedIn</a> · <a href="https://foundation.wikimedia.org/wiki/User:Jorm">Wikimedia: User:Jorm</a>) for teaching me the principles of UX. I've carried those lessons through my career and into the many projects I've had the privilege to contribute to.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  // ----- text-only mode
+  var body=document.body,tbtn=document.getElementById('textToggle');
+  function setText(on){
+    body.classList.toggle('text',on);
+    tbtn.setAttribute('aria-pressed',on?'true':'false');
+    tbtn.textContent=on?'Interactive version':'Text version';
+    if(on) document.querySelectorAll('details.trade').forEach(function(d){ d.open=true; });
+    try{localStorage.setItem('polished-text',on?'1':'0');}catch(e){}
+  }
+  tbtn.addEventListener('click',function(){setText(!body.classList.contains('text'));});
+  try{ if(localStorage.getItem('polished-text')==='1') setText(true); }catch(e){}
+
+  // ----- lens chips
+  var chips=document.querySelectorAll('.chip'),cards=document.querySelectorAll('article.g'),note=document.getElementById('lensNote');
+  var words={
+    where:'<em>Where it is.</em> Orientation (1), pointing (2), position (3), location (4), destination (7). Five of thirteen give up the same thing: the reader knows what, not where.',
+    sure:'<em>Certainty.</em> Precision (5), "does this look right?" (8), recognition (10). The reader can act but can\'t confirm.',
+    route:'<em>Shape or route.</em> Navigational knowledge (6), the shape of the form (11). The reader arrives without learning the way.',
+    control:'<em>Control of the picture.</em> Control (9), visual cleanliness (12). You give up ownership of how it looks.',
+    none:'<em>Nothing.</em> Guideline 13 costs you nothing. It only ever removes a screenshot you didn\'t need.'
+  };
+  var active=null;
+  function applyLens(){
+    cards.forEach(function(c){ c.classList.toggle('dim',!!active && c.dataset.lens!==active); });
+    chips.forEach(function(ch){ ch.setAttribute('aria-pressed',ch.dataset.lens===active?'true':'false'); });
+    note.innerHTML=active?words[active]:'';
+  }
+  chips.forEach(function(ch){ ch.addEventListener('click',function(){ active=(active===ch.dataset.lens)?null:ch.dataset.lens; applyLens(); }); });
+
+  // ----- agent callout: copy a prompt, with this page's address filled in
+  var here=location.href.split('#')[0];
+  document.querySelectorAll('.copy-prompt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var pre=document.getElementById(btn.getAttribute('data-target'));
+      var clone=pre.cloneNode(true);
+      clone.querySelectorAll('.page-url').forEach(function(el){ el.textContent=here; });
+      var status=btn.parentNode.querySelector('.copy-status');
+      function ok(){ status.textContent='Copied.'; setTimeout(function(){ status.textContent=''; },2000); }
+      function fail(){
+        var range=document.createRange(); range.selectNodeContents(pre);
+        var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        status.textContent='Could not copy automatically. Copy the selected prompt and add this page\'s address.';
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(clone.textContent).then(ok,fail); } else { fail(); }
+    });
+  });
+
+  // ----- walkthrough
+  var steps=[
+    {q:'Is this the first screenshot in the document?',from:'From guideline 1, Crop to the minimum.',
+     yes:{v:'take',t:'Take it, and crop wide enough to show which application the reader is in. Everything after this can be tighter.',r:'Guideline 1, exception 1. Date it per guideline 12.'}},
+    {q:'Does the control\'s name appear more than once on the screen, or not match its visible label, or have no label at all?',from:'From guidelines 3 and 4.',
+     yes:{v:'take',t:'Take a tight crop of the control and its neighbors. If the icon is a standard glyph with no lookalikes beside it, an inline glyph in the sentence does the job without a picture.',r:'Guideline 3 exceptions; guideline 4 exceptions.'}},
+    {q:'Will the reader paste or type into a field that is unlabeled or sits among lookalikes, or does pasting do something unexpected?',from:'From guideline 7, code blocks.',
+     yes:{v:'take',t:'Keep the string in a code block and add one screenshot of the paste target. Not of the string.',r:'Guideline 7, both exceptions.'}},
+    {q:'Is success visual rather than countable, or is the action destructive or hard to undo?',from:'From guideline 8, something the reader can check.',
+     yes:{v:'take',t:'Take the end-state screenshot. For a destructive action, show the state the reader should verify before they commit, not after.',r:'Guideline 8, both exceptions.'}},
+    {q:'Are you describing states that are hard to tell apart in words?',from:'From guideline 10, decision tables.',
+     yes:{v:'take',t:'Screenshot the states. A decision table assumes the reader can already spot "A", and here they can\'t.',r:'Guideline 10, exception 1.'}},
+    {q:'Is the form conditional, or long enough that people lose their place?',from:'From guideline 11, field tables.',
+     yes:{v:'take',t:'One screenshot as a map, with the field table underneath it and the location sentence on top.',r:'Guideline 11, both exceptions.'}}
+  ];
+  var skip={v:'skip',t:'Skip the screenshot. Write the path, name the control the way the interface does, hand off to search or deep link, and end with something the reader can check.',r:'Guidelines 2, 3, 5, 6, 8.'};
+  var walk=document.getElementById('walk'),i=0,trail=[];
+  var wq=document.getElementById('wq'),wfrom=document.getElementById('wfrom'),wv=document.getElementById('wverdict'),wt=document.getElementById('wtext'),wr=document.getElementById('wref'),wtr=document.getElementById('wtrail');
+  function render(){
+    walk.classList.remove('done');
+    wq.textContent=(i+1)+'. '+steps[i].q; wfrom.textContent=steps[i].from;
+    document.getElementById('wback').hidden=(i===0);
+  }
+  function finish(res){
+    walk.classList.add('done');
+    wv.textContent=res.v==='take'?'Take the screenshot':'Skip the screenshot';
+    wv.className='verdict '+res.v; wt.textContent=res.t; wr.textContent=res.r;
+    wtr.innerHTML=trail.map(function(x,k){return '<span>Q'+(k+1)+': '+x+'</span>';}).join('');
+  }
+  document.getElementById('wyes').addEventListener('click',function(){ trail.push('yes'); finish(steps[i].yes); });
+  document.getElementById('wno').addEventListener('click',function(){ trail.push('no'); i++; if(i>=steps.length){finish(skip);} else render(); });
+  document.getElementById('wback').addEventListener('click',function(){ if(i>0){i--; trail.pop(); render();} });
+  document.getElementById('wreset').addEventListener('click',function(){ i=0; trail=[]; render(); });
+  render();
+})();
+</script>
+
+</body></html>
