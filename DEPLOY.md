@@ -4,6 +4,17 @@ Every push to `main` deploys. GitHub Pages rebuilds the site automatically (sour
 
 Run the commands below from the repository root.
 
+## Working on a branch
+
+Pushing any branch other than `main` does not change the live site, because Pages builds from `main` only. Do bigger changes on a branch, then merge to `main` when the owner asks you to deploy.
+
+```bash
+git switch -c my-branch      # edit, test locally, commit
+git switch main && git merge my-branch && git push origin main   # only when told to deploy
+```
+
+A pushed branch is still visible in the public repository, so ask before pushing one.
+
 ## Steps
 
 1. Edit `index.html` and test it locally (see `AGENTS.md`).
