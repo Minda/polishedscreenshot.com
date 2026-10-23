@@ -2,7 +2,7 @@
 <!-- Note for agents: every principle, guideline, tradeoff and exception on this page is in this HTML. If you are reading the rendered page instead, turn on Text version (top right) first so the collapsed sections are open. -->
 <html lang="en"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>Polished Screenshot</title>
-<meta name="description" content="Sixteen guidelines and five principles for curating the screenshots in software documentation: which to take, how to crop and mark them, what the words around them must carry, and how to keep them swappable.">
+<meta name="description" content="Principles and guidelines for curating the screenshots in software documentation: which to take, how to crop and mark them, what the words around them must carry, and how to keep them swappable.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
 /* Layout: one 68ch essay column; a quiet sans "instrument panel" (top bar, stepper) sits around serif prose. The 16 guidelines, in three groups, are the spine; everything else serves them. */
@@ -46,10 +46,7 @@ p{margin:0}
 .hero{padding:5rem 0 3rem}
 .hero h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;letter-spacing:-.01em;font-weight:500}
 .deck{font-style:italic;font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.35;color:var(--muted);margin-top:1.4rem;max-width:34em}
-.author,.audience{font-family:var(--sans);font-size:.9rem;line-height:1.5;color:var(--muted);max-width:42em}
-.author{margin-top:1.8rem}
-.author b{color:var(--fg);font-weight:600}
-.audience{margin-top:.7rem;color:var(--fg)}
+.author{font-family:var(--sans);font-size:.9rem;line-height:1.5;color:var(--muted);max-width:42em;margin-top:1.8rem}
 
 /* agent callout */
 .agent-callout{margin-top:2.5rem;margin-bottom:0;padding:1.1rem 1.3rem;background:var(--wash);border:1px solid var(--rule);border-left:6px solid var(--pop);border-radius:14px;display:grid;gap:.7rem}
@@ -57,10 +54,8 @@ p{margin:0}
 .agent-callout h2{font-size:1.35rem;line-height:1.15;margin:0}
 .agent-callout p{font-size:.95em}
 .agent-callout .job{display:grid;gap:.4rem}
-.agent-callout .jobhead{display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap}
-.agent-callout h3{font-family:var(--sans);font-size:.9rem;font-weight:600;color:var(--fg);margin:0}
 .agent-callout pre.prompt{margin:0;padding:.7rem .85rem;background:var(--bg);border:1px solid var(--rule);border-radius:8px;font-family:var(--sans);font-size:.82rem;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
-.agent-callout .copyrow{display:flex;align-items:center;gap:.7rem}
+.agent-callout .copyrow{display:flex;align-items:center;justify-content:flex-end;gap:.7rem}
 .agent-callout .copy-prompt{font:inherit;font-family:var(--sans);font-size:.8rem;padding:.3rem .85rem;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer}
 .agent-callout .copy-status{font-family:var(--sans);font-size:.78rem;color:var(--muted)}
 
@@ -133,6 +128,7 @@ details.trade .inner{padding:0 1.1rem 1.2rem;display:grid;gap:1.1rem;font-size:.
 .coda ol{padding-left:1.3rem;display:grid;gap:.6rem;margin:0}
 .coda .blk{margin-top:1.1rem}
 .coda .rule-stmt{font-size:1.3rem;line-height:1.35;margin-top:1.4rem}
+.coda .lead{font-size:1.2rem;line-height:1.4;margin-top:0}
 .handtest{margin:1.2rem 0 1.4rem}
 .handtest img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:10px}
 .handtest figcaption{font-family:var(--sans);font-size:.85rem;color:var(--muted);margin-top:.6rem}
@@ -159,67 +155,24 @@ body.text .walk-text{display:block}
   <header class="hero col" id="top">
     <h1>Every screenshot is a decision</h1>
     <p class="deck">Polished screenshots are curated. Decide which ones to take, crop and mark the ones you keep, put what matters in the step and alt text around them, and keep each one swappable for the next redesign.</p>
-    <p class="author">These are the principles <b>Minda Myers</b> (<a href="https://www.mindamyers.com">www.mindamyers.com</a>) uses every day as an AI Engineer on the AI Catalyst team at Stanford University, writing how-to documentation for GenAI platforms (Claude, ChatGPT, Gemini).</p>
-    <p class="audience">This site is for the author who maintains the documentation, and for their agent. It is not for the reader of the how-to. Every guideline is written from the author's side of the desk, and the agent prompts are first-class, not a footnote.</p>
+    <p class="author">These are the principles <a href="https://www.mindamyers.com">Minda Myers</a> uses every day as an AI Engineer on Stanford's AI Catalyst team, writing how-to documentation for GenAI platforms (Claude, ChatGPT, Gemini).</p>
   </header>
 
   <div class="col prose">
-    <p>The software you're documenting redesigns itself every few weeks now. AI products are the worst offenders, but it's spreading. A button moves. A panel gets a new name. The settings page splits in two. Every screenshot you publish is a small debt. It comes due at the next redesign, and nothing tells you when. You find out when a reader emails to say the button isn't there. The documentation exists so the team answers fewer tickets and stops rebuilding slides for every audience.</p>
-    <p>So: sixteen guidelines in three groups, under five principles. Each guideline says what you give up by following it, plus the cases where following it would make the document worse. Hit one of those, take the screenshot. The point isn't zero screenshots. The point is that every screenshot in your document is one you decided to take.</p>
+    <p>The software you're documenting redesigns itself every few weeks now. AI products are the worst offenders, but it's spreading. A button moves. A panel gets a new name. The settings page splits in two. Every screenshot you publish is a small debt. It comes due at the next redesign, and nothing tells you when. You find out when a reader emails to say the button isn't there. The documentation exists so the team answers fewer tickets and stops rebuilding slides for every audience. This site is for the author who maintains the documentation, and for their agent. Every guideline is written from the author's side of the desk, and the agent prompts are first-class.</p>
+    <p>So: guidelines in three groups, under five principles. Each guideline says what you give up by following it, plus the cases where following it would make the document worse. Hit one of those, take the screenshot. The point isn't zero screenshots. The point is that every screenshot in your document is one you decided to take.</p>
   </div>
 
   <aside class="col agent-callout" aria-labelledby="agent-callout-title">
     <p class="eyebrow">For your agent</p>
     <h2 id="agent-callout-title">Point your agent at this page</h2>
-    <p>Paste the first prompt into your agent with your documentation; add the second to have it make the changes.</p>
+    <p>Paste this into your agent with your documentation. It reviews first, then asks before changing anything.</p>
 
     <div class="job">
-      <div class="jobhead"><h3>1. Review my documentation</h3><span class="copyrow"><span class="copy-status" role="status"></span><button type="button" class="copy-prompt" data-target="prompt-review">Copy prompt</button></span></div>
-      <pre class="prompt" id="prompt-review">Read <span class="page-url">this page</span>. It sets out five principles, a seven-step Process, and sixteen guidelines in three groups: Write around it, Shoot and mark it, and Replace it with text. Review the documentation I give you against them. For each screenshot, say whether to keep it, replace it with text, or cut it, and cite the guideline by group and name, for example "Shoot: crop to the minimum". Then run the Screenshot Sanity Test on the alt text of every screenshot you keep.</pre>
-    </div>
-
-    <div class="job">
-      <div class="jobhead"><h3>2. Then make the changes</h3><span class="copyrow"><span class="copy-status" role="status"></span><button type="button" class="copy-prompt" data-target="prompt-build">Copy prompt</button></span></div>
-      <pre class="prompt" id="prompt-build">Then make the changes yourself, writing or updating the documentation as needed. Follow the page's Process and its five principles, run the five-question check on every screenshot, and apply the Write, Shoot and Replace guidelines. Run the Screenshot Sanity Test on every alt text. List each screenshot you kept with the guideline behind it, and date it if my documentation uses dates.</pre>
+      <pre class="prompt" id="prompt-review">Read <span class="page-url">this page</span> and review the documentation I give you against it, following its Process. For each screenshot, say whether to keep it, replace it with text, or cut it, citing the guideline by group and name, and run the Screenshot Sanity Test on its alt text. Then ask me whether to go ahead and make the changes.</pre>
+      <div class="copyrow"><span class="copy-status" role="status"></span><button type="button" class="copy-prompt" data-target="prompt-review">Copy prompt</button></div>
     </div>
   </aside>
-
-  <section class="col coda" id="sanity-test" aria-labelledby="sanity-title">
-    <p class="eyebrow">Run it on every screenshot that stays</p>
-    <h2 id="sanity-title">Screenshot Sanity Test</h2>
-    <figure class="handtest">
-      <picture>
-        <source srcset="hand-test-static.svg" media="(prefers-reduced-motion: reduce)">
-        <img src="hand-test.svg" width="800" height="450" loading="lazy" alt="Animated illustration of the hand test: a hand slides over a screenshot of a Google Drive toggle in Connectors, switched on, so only the alt text beneath it can be read.">
-      </picture>
-      <figcaption>Example step, used only for this picture. Its alt text is "The Google Drive toggle in Connectors, switched on (green, knob to the right)." With your hand over the screenshot, could you finish Step 3 using only that line?</figcaption>
-    </figure>
-    <p class="rule-stmt">Alt text describes the action taking place in the screenshot. Cover the screenshot with your hand: the alt text alone must give enough information to understand what needs to happen.</p>
-    <p class="blk"><strong>Primary goal.</strong> Communicate what a reader who cannot see the image needs to understand from it.</p>
-    <p class="blk"><strong>Secondary goal.</strong> Give sighted readers a supporting sentence that adds to the step text rather than repeating it.</p>
-    <p class="blk">Run three tests, in order, on each screenshot you plan to keep. Don't just read them: cover the image with your hand or a couple of fingers and actually do it.</p>
-    <ol>
-      <li><strong>Hand test, alt text alone.</strong> Cover the image. Read only the alt text. Could you complete the step? If you would have to lift your hand, the alt text isn't done.</li>
-      <li><strong>Hand test, in context.</strong> Hand still covering the image. Read the step text and the alt text together. Does the alt text add to the step or repeat it? Trim the repeat.</li>
-      <li><strong>Agent test.</strong> Could an agent operating the interface on behalf of a non-sighted user take the correct action from the alt text alone? If not, the alt text is missing a location, a label, or a state.</li>
-    </ol>
-    <p class="blk">If nothing is left after trimming, the screenshot goes too.</p>
-    <p class="blk"><strong>Alt text never carries steps.</strong> Instructions belong in the step body. Reviewers caught alt text that had started drafting steps ("Open the general access menu to choose who can open the doc"). Each time, the step moved up and the alt text shrank.</p>
-    <p class="blk"><strong>Two exceptions.</strong> A complex image (a dashboard, a chart) gets a longer description near the image, not alt text. An error message or status string goes in the prose.</p>
-  </section>
-
-  <section class="col principles" id="principles" aria-labelledby="principles-title">
-    <p class="eyebrow">Before the guidelines</p>
-    <h2 id="principles-title">Five principles sit under every guideline</h2>
-    <p class="why">A principle shapes a whole document. A guideline handles one screenshot.</p>
-    <ol>
-      <li><p class="num">1</p><p class="stmt">Every essential action, interface label, prerequisite, warning, and expected result has to be available outside the screenshot.</p></li>
-      <li><p class="num">2</p><p class="stmt">Minimize the number of surfaces you have to maintain, at every available opportunity.</p></li>
-      <li><p class="num">3</p><p class="stmt">Compartmentalize your documentation, especially the sections most likely to change, so that when an interface is updated they can be swapped in and revised quickly and easily.</p></li>
-      <li><p class="num">4</p><p class="stmt">One step, one state change.</p><p class="detail">Every step represents one conceptual change in state. It opens with no more than half a sentence on where the previous step left the reader, then the action, then the state the reader should be in when it ends. Most steps carry one screenshot. A second screenshot in a step is allowed only when one picture cannot show how to reach the new state.</p></li>
-      <li><p class="num">5</p><p class="stmt">Canonical route first, shortcuts after.</p><p class="detail">The first time through, a reader follows the route that shows them where things live. Shortcuts (slash commands, product search, deep links) come after, as a tip, once the reader can picture what the shortcut skips. "Replace: product search" and "Replace: deep link" stay as they are; this principle says where in a document they belong. The Remote Control doc is the worked case: the session-rail route is the steps, /remote-control is the tip underneath.</p></li>
-    </ol>
-  </section>
 
   <section class="col process" id="process" aria-labelledby="process-title">
     <p class="eyebrow">How to work</p>
@@ -236,9 +189,22 @@ body.text .walk-text{display:block}
     <p class="after">One screenshot per step is the default output of step 1; two per step needs the Principle 4 justification written into the step.</p>
   </section>
 
+  <section class="col principles" id="principles" aria-labelledby="principles-title">
+    <p class="eyebrow">Before the guidelines</p>
+    <h2 id="principles-title">Five principles sit under every guideline</h2>
+    <p class="why">A principle shapes a whole document. A guideline handles one screenshot.</p>
+    <ol>
+      <li><p class="num">1</p><p class="stmt">Every essential action, interface label, prerequisite, warning, and expected result has to be available outside the screenshot.</p></li>
+      <li><p class="num">2</p><p class="stmt">Minimize the number of surfaces you have to maintain, at every available opportunity.</p></li>
+      <li><p class="num">3</p><p class="stmt">Compartmentalize your documentation, especially the sections most likely to change, so that when an interface is updated they can be swapped in and revised quickly and easily.</p></li>
+      <li><p class="num">4</p><p class="stmt">One step, one state change.</p><p class="detail">Every step represents one conceptual change in state. It opens with no more than half a sentence on where the previous step left the reader, then the action, then the state the reader should be in when it ends. Most steps carry one screenshot. A second screenshot in a step is allowed only when one picture cannot show how to reach the new state.</p></li>
+      <li><p class="num">5</p><p class="stmt">Canonical route first, shortcuts after.</p><p class="detail">The first time through, a reader follows the route that shows them where things live. Shortcuts (slash commands, product search, deep links) come after, as a tip, once the reader can picture what the shortcut skips. "Replace: product search" and "Replace: deep link" stay as they are; this principle says where in a document they belong. The Remote Control doc is the worked case: the session-rail route is the steps, /remote-control is the tip underneath.</p></li>
+    </ol>
+  </section>
+
   <section class="col" id="guidelines">
     <p class="eyebrow">The guidelines</p>
-    <h2>Sixteen guidelines, in three groups</h2>
+    <h2>Guidelines, grouped by what you're doing</h2>
     <p>Open <em>What it costs</em> under any guideline for the tradeoff and the exceptions. Guidelines are cited by group and name, for example "Shoot: crop to the minimum".</p>
   </section>
 
@@ -581,6 +547,31 @@ body.text .walk-text{display:block}
     </div>
   </section>
 
+  <section class="col coda" id="sanity-test" aria-labelledby="sanity-title">
+    <p class="eyebrow">Run it on every screenshot that stays</p>
+    <h2 id="sanity-title">Screenshot Sanity Test</h2>
+    <p class="blk lead"><strong>Cover the screenshot with your hand. What's left is everything a reader who can't see it gets, and it has to be enough to do the step.</strong></p>
+    <figure class="handtest">
+      <picture>
+        <source srcset="hand-test-static.svg" media="(prefers-reduced-motion: reduce)">
+        <img src="hand-test.svg" width="800" height="450" loading="lazy" alt="Animated illustration of the hand test: a hand slides over a screenshot of a Google Drive toggle in Connectors, switched on, so only the alt text beneath it can be read.">
+      </picture>
+      <figcaption>Example step, used only for this picture. Its alt text is "The Google Drive toggle in Connectors, switched on (green, knob to the right)." With your hand over the screenshot, could you finish Step 3 using only that line?</figcaption>
+    </figure>
+    <p class="rule-stmt">Alt text describes the action taking place in the screenshot. Cover the screenshot with your hand: the alt text alone must give enough information to understand what needs to happen.</p>
+    <p class="blk"><strong>Primary goal.</strong> Communicate what a reader who cannot see the image needs to understand from it.</p>
+    <p class="blk"><strong>Secondary goal.</strong> Give sighted readers a supporting sentence that adds to the step text rather than repeating it.</p>
+    <p class="blk">Run three tests, in order, on each screenshot you plan to keep. Don't just read them: cover the image with your hand or a couple of fingers and actually do it.</p>
+    <ol>
+      <li><strong>Hand test, alt text alone.</strong> Cover the image. Read only the alt text. Could you complete the step? If you would have to lift your hand, the alt text isn't done.</li>
+      <li><strong>Hand test, in context.</strong> Hand still covering the image. Read the step text and the alt text together. Does the alt text add to the step or repeat it? Trim the repeat.</li>
+      <li><strong>Agent test.</strong> Could an agent operating the interface on behalf of a non-sighted user take the correct action from the alt text alone? If not, the alt text is missing a location, a label, or a state.</li>
+    </ol>
+    <p class="blk">If nothing is left after trimming, the screenshot goes too.</p>
+    <p class="blk"><strong>Alt text never carries steps.</strong> Instructions belong in the step body. Reviewers caught alt text that had started drafting steps ("Open the general access menu to choose who can open the doc"). Each time, the step moved up and the alt text shrank.</p>
+    <p class="blk"><strong>Two exceptions.</strong> A complex image (a dashboard, a chart) gets a longer description near the image, not alt text. An error message or status string goes in the prose.</p>
+  </section>
+
   <section class="col" id="decide">
     <p class="eyebrow">Try it on a step you're writing</p>
     <h2>Do you need a screenshot here?</h2>
@@ -620,7 +611,7 @@ body.text .walk-text{display:block}
 
   <footer class="col">
     <span>Polished Screenshot is written by Minda Myers · <a href="https://www.mindamyers.com">www.mindamyers.com</a> · <a href="https://github.com/Minda/">github.com/Minda</a></span>
-    <span>Plain HTML, no build step, no tracking. Last revised 19 Oct 2026.</span>
+    <span>Plain HTML, no build step, no tracking. Last revised 22 Oct 2026.</span>
     <span>Credit to Brandon Harris (<a href="https://www.linkedin.com/in/brandonharris1/">LinkedIn</a> · <a href="https://foundation.wikimedia.org/wiki/User:Jorm">Wikimedia: User:Jorm</a>) for teaching me the principles of UX. I've carried those lessons through my career and into the many projects I've had the privilege to contribute to.</span>
     <span>Credit to Danielle Fong (<a href="https://x.com/DanielleFong">X</a>) for inspiring the idea to make a site like this one.</span>
   </footer>

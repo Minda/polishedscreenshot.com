@@ -4,7 +4,7 @@ Instructions for AI coding agents working in this repository.
 
 ## What this is
 
-The source of https://www.polishedscreenshot.com/ (the bare domain redirects to `www`). It is one static page, "Every screenshot is a decision": five principles, a process, a Screenshot Sanity Test and sixteen guidelines in three groups (Write around it, Shoot and mark it, Replace it with text) for curating the screenshots in software documentation. It is written for the author who maintains the documentation and for their agent, not for the reader of the how-to.
+The source of https://www.polishedscreenshot.com/ (the bare domain redirects to `www`). It is one static page, "Every screenshot is a decision": principles, a process, a Screenshot Sanity Test and guidelines in three groups (Write around it, Shoot and mark it, Replace it with text) for curating the screenshots in software documentation. It is written for the author who maintains the documentation and for their agent, not for the reader of the how-to.
 
 GitHub Pages serves it straight from the `main` branch root. There is no build step and no framework. The page is plain HTML with inline CSS and JavaScript, and its one external dependency is a Google Fonts stylesheet.
 
@@ -26,7 +26,7 @@ GitHub Pages serves it straight from the `main` branch root. There is no build s
 - **One page, relative paths.** Keep the page in `index.html`; the only other assets are the two SVGs above. Use lowercase filenames, because URLs are case-sensitive. If you test from a copy that links to other pages (for example a "Home" link), remove those links before the copy replaces `index.html`.
 - **Keep the content visible in the HTML.** Use real `<a>` and `<button>` elements and labelled controls, and keep anything important out of metadata and out of JavaScript-only output. The page teaches this, so it should follow it.
 - **Do not rewrite the author's words** (the principles, the guidelines, the author and audience lines, the credits to Brandon Harris and Danielle Fong) unless asked. Leave the text and links exactly as they are.
-- **The "For your agent" callout** holds two copyable prompts. The copy buttons fill in the page's own address when clicked, so the first prompt must keep its `<span class="page-url">` after the word "Read". Keep the prompts short. They cite the page by section name (the Process, the Screenshot Sanity Test, the five-question check and the three guideline groups), so update them whenever one of those names changes.
+- **The "For your agent" callout** holds one copyable prompt. The copy button fills in the page's own address when clicked, so the prompt must keep its `<span class="page-url">` after the word "Read". Keep the prompt short. It cites the page by section name (the Process, the Screenshot Sanity Test and the guideline groups), so update it whenever one of those names changes.
 - **Guidelines are cited by group and name**, for example "Shoot: crop to the minimum". Each card's label shows its group, its number within the group and that short name. If you rename, add or remove a guideline, update every citation: the prompts, the Process, the five-question check and its text version.
 - **The "Note for agents" is an HTML comment** at the top of `index.html`, not visible text. Keep it there.
 - **Pushing to `main` publishes immediately.** Only push when the owner has asked you to deploy. Work on a branch; pushing a branch does not change the live site (see `DEPLOY.md`).
@@ -42,8 +42,8 @@ python3 -m http.server 8000
 Open http://localhost:8000/ and check:
 
 - the browser console shows no errors
-- all 16 guidelines (5 Write, 5 Shoot, 6 Replace) and the 5 principles are present
+- the principles, the Process, all three guideline groups and the Screenshot Sanity Test are present
 - the five-question walkthrough and the Text version toggle work
-- both Copy prompt buttons work
+- the Copy prompt button works
 - the hand-test illustration loads and animates
 - nothing jumps around while the page loads
